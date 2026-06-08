@@ -1,10 +1,3 @@
-interface Job {
-    title: string;
-    description: string;
-    location: string;
-    requiredSkills: string[];
-}
-
 interface Resume {
     id: string;
     companyName?: string;
@@ -14,45 +7,46 @@ interface Resume {
     feedback: Feedback;
 }
 
+
+
 interface Feedback {
     overallScore: number;
-    ATS: {
+    overallSummary?: string;    // Seen in console log
+    improvements?: any[];// Seen in console log (array of 12 things)
+    sections?: {
+        [key: string]:{
+            score: number;
+            feedback?:string;
+            tips?: Array<{
+                type : "good" | "improve";
+                tip : string;
+                explanation? : string;
+            }>;
+        }
+    }
+
+    // Make these optional since the live payload currently lacks them
+    ATS?: {
         score: number;
         tips: {
             type: "good" | "improve";
             tip: string;
         }[];
     };
-    toneAndStyle: {
+    toneAndStyle?: {
         score: number;
-        tips: {
-            type: "good" | "improve";
-            tip: string;
-            explanation: string;
-        }[];
+        tips: { type: "good" | "improve"; tip: string; explanation: string; }[];
     };
-    content: {
+    content?: {
         score: number;
-        tips: {
-            type: "good" | "improve";
-            tip: string;
-            explanation: string;
-        }[];
+        tips: { type: "good" | "improve"; tip: string; explanation: string; }[];
     };
-    structure: {
+    structure?: {
         score: number;
-        tips: {
-            type: "good" | "improve";
-            tip: string;
-            explanation: string;
-        }[];
+        tips: { type: "good" | "improve"; tip: string; explanation: string; }[];
     };
-    skills: {
+    skills?: {
         score: number;
-        tips: {
-            type: "good" | "improve";
-            tip: string;
-            explanation: string;
-        }[];
+        tips: { type: "good" | "improve"; tip: string; explanation: string; }[];
     };
 }
